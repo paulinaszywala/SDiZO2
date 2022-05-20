@@ -12,8 +12,8 @@ class AdList {
 
 private:
 
-    int n;  //liczba wierzchołków grafu
-    int m;  //liczba krawędzi grafu
+    int v;  //liczba wierzchołków grafu
+    int k;  //liczba krawędzi grafu
 
 
     stList ** tab;

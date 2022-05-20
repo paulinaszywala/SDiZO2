@@ -7,8 +7,8 @@ class Matrix {
 
 private:
 
-    int n;  //liczba wierzchołków macierzy
-    int m;  //liczba krawędzi macierzy
+    int v;  //liczba wierzchołków macierzy
+    int k;  //liczba krawędzi macierzy
 
     signed char ** tab;
 

@@ -14,28 +14,28 @@ void AdList::readFromFile()
 
     int v1; //wierzchołek początkowy
     int v2; //wierzchołek końcowy
-    int k;  //krawędź - waga
+    int w;  //krawędź - waga
 
     std::ifstream file("Data.txt");
 
 
     if(file.is_open()){
 
-        file >> m;                      //wczytujemy rozmiar macierzy z pliku
-        file >> n;
+        file >> k;                      //wczytujemy rozmiar macierzy z pliku
+        file >> v;
 
-        tab = new stList * [n];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
+        tab = new stList * [v];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
 
-        for(i = 0; i < n; i++)
+        for(i = 0; i < v; i++)
         {
             tab [i] = NULL;         // Tablicę wypełniamy zerami
         }
 
-        for( i = 0; i < m; i++ )
+        for( i = 0; i < k; i++ )
         {
             file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
             file >> v2;
-            file >> k;
+            file >> w;
 
             p = new stList;    // Tworzymy nowy element
             p->v = v2;          // Numerujemy go jako v2
@@ -53,7 +53,7 @@ void AdList::displayAdList(){
 
     int i,j;
 
-    for( i = 0; i < n; i++ )
+    for( i = 0; i < v; i++ )
     {
         std::cout << "tab [ " << i << " ] =";
         p = tab [ i ];
@@ -75,7 +75,7 @@ void AdList::deleteList(){
 
     int i;
 
-    for( i = 0; i < n; i++ )
+    for( i = 0; i < v; i++ )
     {
         p = tab [ i ];
 

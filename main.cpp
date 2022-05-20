@@ -105,7 +105,7 @@ int main() {
                 cout << "Niepoprawna opcja!" << endl;
                 break;
             }
-            //Wyjscie z programu
+            //Wyjście z programu
             case 0:
                 return 0;
             //Wyznaczanie minimalnego drzewa rozpinającego
