@@ -38,8 +38,9 @@ void AdList::readFromFile()
             file >> w;
 
             p = new stList;    // Tworzymy nowy element
-            p->v = v2;          // Numerujemy go jako v2
+            p->index = v2;          // Numerujemy go jako v2
             p->next = tab [v1]; // Dodajemy go na początek listy A [ v1 ]
+            p->weight = w;
             tab [v1] = p;
         }
     }
@@ -60,7 +61,7 @@ void AdList::displayAdList(){
 
         while( p )
         {
-            std::cout << std::setw ( 3 ) << p->v;
+            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
             p = p->next;
         }
         std::cout << std::endl;

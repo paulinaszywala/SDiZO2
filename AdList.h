@@ -1,11 +1,9 @@
-//
-// Created by pauli on 20.05.2022.
-//
 
 struct stList
 {
     stList * next;
-    int v;
+    int index;
+    int weight;
 };
 
 class AdList {
