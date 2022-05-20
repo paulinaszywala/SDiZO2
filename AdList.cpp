@@ -10,7 +10,6 @@
 
 void AdList::readFromFile()
 {
-    int i,j;
 
     int v1; //wierzchołek początkowy
     int v2; //wierzchołek końcowy
@@ -26,13 +25,14 @@ void AdList::readFromFile()
 
         tab = new stList * [v];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
 
-        for(i = 0; i < v; i++)
+        for(int i = 0; i < v; i++)
         {
             tab [i] = NULL;         // Tablicę wypełniamy zerami
         }
 
-        for( i = 0; i < k; i++ )
+        for(int i = 0; i < k; i++ )
         {
+
             file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
             file >> v2;
             file >> w;
@@ -45,16 +45,11 @@ void AdList::readFromFile()
         }
     }
     file.close();
-
-
     std::cout << std::endl;
 }
 
 void AdList::displayAdList(){
-
-    int i,j;
-
-    for( i = 0; i < v; i++ )
+    for(int i = 0; i < v; i++ )
     {
         std::cout << "tab [ " << i << " ] =";
         p = tab [ i ];
@@ -66,28 +61,43 @@ void AdList::displayAdList(){
         }
         std::cout << std::endl;
     }
-
 }
 
 
 
 
 void AdList::deleteList(){
-
-    int i;
-
-    for( i = 0; i < v; i++ )
+    for(int i = 0; i < v; i++ )
     {
         p = tab [ i ];
 
         while( p )
         {
-            r = p;
+            temp = p;
             p = p->next;
-            delete r;
+            delete temp;
         }
     }
 
     delete [ ] tab;
 
 }
+
+int AdList::getV() {
+    return v;
+}
+
+stList * AdList::getList(int i) {
+    return  tab[i];
+}
+
+void AdList::kruskal() {
+    L = new stList * [v];
+    for(int i = 0; i < v; i++)
+    {
+        L [i] = tab [i];
+    }
+
+}
+
+

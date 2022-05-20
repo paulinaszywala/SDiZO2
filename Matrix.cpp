@@ -50,8 +50,6 @@ void Matrix::readFromFile()
         }
     }
     file.close();
-
-
     std::cout << "   ";
 }
 

@@ -1,7 +1,6 @@
 #include <iostream>
 #include "Matrix.h"
 #include "AdList.h"
-//#include "Kruskal.h"
 
 Matrix m;
 AdList list;
