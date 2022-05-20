@@ -119,12 +119,16 @@ int main() {
                     case 1: {
                         readFromFile();
                         MST();
+                        m.deleteMatrix();
+                        list.deleteList();
                         break;
                     }
                     //Losowanie grafu
                     case 2: {
                         randGenerate();
                         MST();
+                        m.deleteMatrix();
+                        list.deleteList();
                         break;
                     }
                     default: {
