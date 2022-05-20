@@ -16,7 +16,7 @@ void Matrix::readFromFile()
 
     int i,j;
 
-    std::ifstream file("C:/Users/pauli/ClionProjects/SDiZO2/Data.txt");
+    std::ifstream file("Data.txt");
 
 
     if(file.is_open()){

@@ -15,7 +15,7 @@ int main() {
     AdList list;
 
     list.readFromFile();
-    list.displayAdListAsArray();
+    list.displayAdList();
 
     //Kruskal k;
 

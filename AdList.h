@@ -22,8 +22,7 @@ private:
 public:
 
     void readFromFile();
-    void displayAdListAsArray();
-    void displayAdListAsMatrix();
+    void displayAdList();
     void deleteList();
 
 };

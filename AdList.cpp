@@ -49,7 +49,7 @@ void AdList::readFromFile()
     std::cout << std::endl;
 }
 
-void AdList::displayAdListAsArray(){
+void AdList::displayAdList(){
 
     int i,j;
 
@@ -68,24 +68,7 @@ void AdList::displayAdListAsArray(){
 
 }
 
-void AdList::displayAdListAsMatrix(){
 
-    int i,j;
-
-    for( i = 0; i < n; i++ )
-    {
-        std::cout << std::setw ( 3 ) << i;
-        p = tab [ i ];
-
-        while( p )
-        {
-            std::cout << std::setw ( 3 ) << p->v;
-            p = p->next;
-        }
-        std::cout << std::endl;
-    }
-
-}
 
 
 void AdList::deleteList(){
