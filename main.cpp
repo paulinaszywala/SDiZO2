@@ -32,10 +32,6 @@ void randGenerate(){
     int v,k;
     float d;
 
-    int tabv1[v-1];
-    int tabv2[v-1];
-    int tabw[k];
-
     int v1; //wierzchołek początkowy
     int v2; //wierzchołek końcowy
     int w;  //krawędź - waga
@@ -44,7 +40,11 @@ void randGenerate(){
     d = 0.25;
     k = floor((d * v * (v-1)) / 2);
 
-    for(int i = 0; i < k; i++)
+    int tabv1[v];
+    int tabv2[v];
+    int tabw[k];
+
+    for(int i = 0; i < v; i++)
     {
         v1 = Random(0, (v-1));
         tabv1[i] = v1;

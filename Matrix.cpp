@@ -57,7 +57,6 @@ void Matrix::readFromFile()
 
 void Matrix::displayMatrix()
 {
-
     int i,j;
     std:: cout <<"   ";
     for( i = 0; i < k; i++ )
@@ -126,27 +125,27 @@ void Matrix::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * 
         }
 
         //disp
-//    int i,j;
-//    std:: cout <<"   ";
-//    for( i = 0; i < k; i++ )
-//    {
-//        std::cout << std::setw ( 3 ) << i;        //numeracja kolumn
-//    }
-//
-//    std::cout << std::endl;
-//
-//    for( i = 0; i < v; i++ )
-//    {
-//
-//        std::cout << std::setw ( 3 ) << i;        //numeracja wierszy
-//
-//        for( j = 0; j < k; j++ )
-//        {
-//            std::cout << std::setw ( 3 ) << ( int ) tab [i][j];
-//        }
-//
-//        std::cout << std::endl;
-//    }
+    int i,j;
+    std:: cout <<"   ";
+    for( i = 0; i < k; i++ )
+    {
+        std::cout << std::setw ( 3 ) << i;        //numeracja kolumn
+    }
+
+    std::cout << std::endl;
+
+    for( i = 0; i < v; i++ )
+    {
+
+        std::cout << std::setw ( 3 ) << i;        //numeracja wierszy
+
+        for( j = 0; j < k; j++ )
+        {
+            std::cout << std::setw ( 3 ) << ( int ) tab [i][j];
+        }
+
+        std::cout << std::endl;
+    }
         //disp
 
     }

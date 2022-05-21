@@ -109,20 +109,20 @@ void AdList::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * 
             tab [v1] = p;
         }
 
-//    //disp
-//    for(int i = 0; i < v; i++ )
-//    {
-//        std::cout << "tab [ " << i << " ] =";
-//        p = tab [ i ];
-//
-//        while( p )
-//        {
-//            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
-//            p = p->next;
-//        }
-//        std::cout << std::endl;
-//    }
-//    //disp
+    //disp
+    for(int i = 0; i < v; i++ )
+    {
+        std::cout << "tab [ " << i << " ] =";
+        p = tab [ i ];
+
+        while( p )
+        {
+            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
+            p = p->next;
+        }
+        std::cout << std::endl;
+    }
+    //disp
 
 }
 
