@@ -1,6 +1,8 @@
 #include <iostream>
+#include <random>
 #include "Matrix.h"
 #include "AdList.h"
+//#include "Kruskal.h"
 
 Matrix m;
 AdList list;
@@ -12,7 +14,51 @@ void readFromFile(){
     m.readFromFile();
     list.readFromFile();
 }
+
+int Random(int min, int max)            //Funkcja do generowania wartości losowych z przedziału <min, max>
+{
+    int i;
+
+    std::random_device crypto_random_generator;
+    std::uniform_int_distribution<int> int_distribution(min, max);
+
+    int result = int_distribution(crypto_random_generator);
+
+    return result;
+}
+
 void randGenerate(){
+
+    int v,k;
+    float d;
+
+    int tabv1[v-1];
+    int tabv2[v-1];
+    int tabw[k];
+
+    int v1; //wierzchołek początkowy
+    int v2; //wierzchołek końcowy
+    int w;  //krawędź - waga
+
+    v = Random(4,10);
+    d = 0.25;
+    k = floor((d * v * (v-1)) / 2);
+
+    for(int i = 0; i < k; i++)
+    {
+        v1 = Random(0, (v-1));
+        tabv1[i] = v1;
+        v2 = Random(0, (v-1));
+        tabv2[i] = v2;
+    }
+    for(int i = 0; i < k; i++)
+    {
+        w = Random(0,k);
+        tabw[i] = w;
+    }
+
+    m.randomGraph(v,d,k,tabv1,tabv2,tabw);
+    list.randomGraph(v,d,k,tabv1,tabv2,tabw);
     //tutaj losowanie i generowanie struktur
 }
 void MST(){
@@ -165,4 +211,5 @@ int main() {
             }
         }
     }
+
 }

@@ -29,11 +29,13 @@ private:
 
 public:
 
-    stList * getList(int i);
-    int getV();
+
+
     void readFromFile();
     void displayAdList();
     void deleteList();
+    void randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw);
+    int getV();
+    stList * getList(int i);
     void kruskal();
-
 };

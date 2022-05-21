@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <random>
 
 void Matrix::readFromFile()
 {
@@ -90,4 +91,80 @@ void Matrix::deleteMatrix()
     }
 
     delete [ ] tab;
+
 }
+
+void Matrix::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw)
+{
+    int v1; //wierzchołek początkowy
+    int v2; //wierzchołek końcowy
+    int w;  //krawędź - waga
+
+        tab = new signed char * [v];                  //tworzymy tablicę wskaźników do przechowywania macierzy incydencji
+
+        for(int i = 0; i < v; i++)
+        {
+            tab [i] = new signed char [k];         // Tworzymy wiersze macierzy
+        }
+
+        for(int i = 0; i < v; i++ )
+        {
+            for(int j = 0; j < k; j++ )
+            {
+                tab[ i ][ j ] = 0;                      // Macierz wypełniamy zerami, zanim uzupełnimy ją 1 i -1
+            }
+        }
+
+        for(int i = 0; i < k; i++ )
+        {
+            v1 = tabv1[i];
+            v2 = tabv2[i];
+            w = tabw[i];
+
+            tab[v2][i] = -w;    // Wierzchołek końcowy
+            tab[v1][i] = w;     // Wierzchołek startowy
+        }
+
+        //disp
+//    int i,j;
+//    std:: cout <<"   ";
+//    for( i = 0; i < k; i++ )
+//    {
+//        std::cout << std::setw ( 3 ) << i;        //numeracja kolumn
+//    }
+//
+//    std::cout << std::endl;
+//
+//    for( i = 0; i < v; i++ )
+//    {
+//
+//        std::cout << std::setw ( 3 ) << i;        //numeracja wierszy
+//
+//        for( j = 0; j < k; j++ )
+//        {
+//            std::cout << std::setw ( 3 ) << ( int ) tab [i][j];
+//        }
+//
+//        std::cout << std::endl;
+//    }
+        //disp
+
+    }
+
+
+
+//
+//int Matrix::vertexCount()
+//{
+//    return n;
+//}
+//
+//int Matrix::edgesCount()
+//{
+//    return m;
+//}
+//
+//signed char ** Matrix::getMatrix()
+//{
+//    return tab;
+//}

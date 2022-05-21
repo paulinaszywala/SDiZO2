@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iostream>
 #include <iomanip>
+#include <random>
 
 
 void AdList::readFromFile()
@@ -37,9 +38,9 @@ void AdList::readFromFile()
             file >> v2;
             file >> w;
 
-            p = new stList;    // Tworzymy nowy element
+            p = new stList;         // Tworzymy nowy element
             p->index = v2;          // Numerujemy go jako v2
-            p->next = tab [v1]; // Dodajemy go na początek listy A [ v1 ]
+            p->next = tab [v1];     // Dodajemy go na początek listy A [ v1 ]
             p->weight = w;
             tab [v1] = p;
         }
@@ -64,8 +65,6 @@ void AdList::displayAdList(){
 }
 
 
-
-
 void AdList::deleteList(){
     for(int i = 0; i < v; i++ )
     {
@@ -80,6 +79,50 @@ void AdList::deleteList(){
     }
 
     delete [ ] tab;
+
+}
+
+void AdList::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw)
+{
+
+    int v1; //wierzchołek początkowy
+    int v2; //wierzchołek końcowy
+    int w;  //krawędź - waga
+
+    tab = new stList * [v];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
+
+        for(int i = 0; i < v; i++)
+        {
+            tab [i] = NULL;         // Tablicę wypełniamy zerami
+        }
+
+        for(int i = 0; i < k; i++ )
+        {
+            v1 = tabv1[i];
+            v2 = tabv2[i];
+            w = tabw[i];
+
+            p = new stList;         // Tworzymy nowy element
+            p->index = v2;          // Numerujemy go jako v2
+            p->next = tab [v1];     // Dodajemy go na początek listy A [ v1 ]
+            p->weight = w;
+            tab [v1] = p;
+        }
+
+//    //disp
+//    for(int i = 0; i < v; i++ )
+//    {
+//        std::cout << "tab [ " << i << " ] =";
+//        p = tab [ i ];
+//
+//        while( p )
+//        {
+//            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
+//            p = p->next;
+//        }
+//        std::cout << std::endl;
+//    }
+//    //disp
 
 }
 
