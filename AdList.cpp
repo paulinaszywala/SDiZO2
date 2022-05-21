@@ -33,10 +33,14 @@ void AdList::readFromFile()
 
         for(int i = 0; i < k; i++ )
         {
-
             file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
             file >> v2;
             file >> w;
+
+            if(i == 0)
+            {
+                v0 = v1;
+            }
 
             p = new stList;         // Tworzymy nowy element
             p->index = v2;          // Numerujemy go jako v2
@@ -109,20 +113,20 @@ void AdList::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * 
             tab [v1] = p;
         }
 
-    //disp
-    for(int i = 0; i < v; i++ )
-    {
-        std::cout << "tab [ " << i << " ] =";
-        p = tab [ i ];
-
-        while( p )
-        {
-            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
-            p = p->next;
-        }
-        std::cout << std::endl;
-    }
-    //disp
+//    //disp
+//    for(int i = 0; i < v; i++ )
+//    {
+//        std::cout << "tab [ " << i << " ] =";
+//        p = tab [ i ];
+//
+//        while( p )
+//        {
+//            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
+//            p = p->next;
+//        }
+//        std::cout << std::endl;
+//    }
+//    //disp
 
 }
 
@@ -140,6 +144,103 @@ void AdList::kruskal() {
     {
         L [i] = tab [i];
     }
+
+
+
+}
+
+void AdList::dijkstry()
+{
+    //DIJKSTRY
+
+    const int MAXINT = 2147483647; //nieksończonosć tak jakby
+    int *S, *d, *pr;
+    bool *QS;                       //zbiory Q i S
+    int sptr;                       //wskaźnik stosu
+    stList *pw, *rw;
+    int i,j,u;
+
+    d = new int [v];    //tablica kosztow dojścia
+    pr = new int [v];   //tablica poprzedników
+
+    QS = new bool[v];
+    S = new int[v];     //stos
+    sptr = 0;
+
+
+
+    //Inicjalizacja tablic
+
+    for(int i = 0; i < v; i++)
+    {
+        d[i] = MAXINT;   //"nieskończoność"
+        pr[i] = -1;      //nieistniejący numer wierzchołka
+        QS[i] = false;
+        //listę sąsiedztwa mamy już wypełnioną zerami
+    }
+
+    d[v0] = 0;          //koszt dojścia do wierzchołka startowego jest zerowy
+
+
+    //Wyznaczamy ścieżki
+
+    for(i = 0; i < v; i++ )
+    {
+        for(j = 0; QS [j]; j++ );     //Szukamy wierzchołka w Q o najmniejszym koszcie d
+
+        for(u = j++; j < v; j++ )
+        {
+            if (!QS[j] && (d[j] < d[u])) {
+                u = j;
+            }
+        }
+
+        // Znaleziony wierzchołek przenosimy do S
+
+        QS [ u ] = true;
+
+        // Modyfikujemy odpowiednio wszystkich sąsiadów u, którzy są w Q
+
+        for( pw = tab [u]; pw; pw = pw->next ) {
+            if (!QS[pw->index] && (d[pw->index] > d[u] + pw->weight)) {
+                d[pw->index] = d[u] + pw->weight;
+                pr[pw->index] = u;
+            }
+        }
+    }
+
+
+
+    //WYŚWIETLENIE WYNIKÓW
+
+    for( i = 0; i < v; i++ )
+    {
+        std::cout << i << ": ";
+
+        //Ścieżkę przechodzimy w odrotnej kolejności (koniec - > początek), kolejne wierzchołki zapisujemy na stosie
+
+
+        for(int j = i; j > -1; j = pr [ j ] )
+        {
+            S [ sptr++ ] = j;
+        }
+
+        // Wyświetlamy ścieżkę, pobierając wierzchołki ze stosu
+
+        while( sptr ){
+
+            std::cout << S [ --sptr ] << " ";
+        }
+
+        // Na końcu ścieżki wypisujemy jej koszt
+
+        std::cout << "$" << d [ i ] << std::endl;
+    }
+
+    delete [] d;
+    delete [] pr;
+    delete [] QS;
+    delete [] S;
 
 }
 

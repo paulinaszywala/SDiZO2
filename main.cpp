@@ -2,7 +2,7 @@
 #include <random>
 #include "Matrix.h"
 #include "AdList.h"
-//#include "Kruskal.h"
+
 
 Matrix m;
 AdList list;
@@ -119,6 +119,7 @@ void ShortestPath(){
             }
             case 3: {
                 //tu wywołanie Dijkstry
+                list.dijkstry();
                 break;
             }
             case 4: {
