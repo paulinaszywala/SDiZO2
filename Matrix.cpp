@@ -8,52 +8,42 @@
 #include <iomanip>
 #include <random>
 
-void Matrix::readFromFile()
-{
-
-    int v1; //wierzchołek początkowy
-    int v2; //wierzchołek końcowy
-    int w;  //krawędź - waga
-
-    int i,j;
-
-    std::ifstream file("Data.txt");
-
-
-    if(file.is_open()){
-
-        file >> k;                                  //wczytujemy rozmiar macierzy z pliku
-        file >> v;
-
-        tab = new signed char * [v];                  //tworzymy tablicę wskaźników do przechowywania macierzy incydencji
-
-        for(i = 0; i < v; i++)
-        {
-            tab [i] = new signed char [k];         // Tworzymy wiersze macierzy
-        }
-
-        for( i = 0; i < v; i++ )
-        {
-            for( j = 0; j < k; j++ )
-            {
-                tab[ i ][ j ] = 0;                      // Macierz wypełniamy zerami, zanim uzupełnimy ją 1 i -1
-            }
-        }
-
-        for( i = 0; i < k; i++ )
-        {
-            file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
-            file >> v2;
-            file >> w;
-            tab[v2][i] = -w;    // Wierzchołek końcowy
-            tab[v1][i] = w;     // Wierzchołek startowy
-
-        }
-    }
-    file.close();
-    std::cout << "   ";
-}
-
+//void Matrix::readFromFile()
+//{
+//
+//    int v1; //wierzchołek początkowy
+//    int v2; //wierzchołek końcowy
+//    int w;  //krawędź - waga
+//    int i,j;
+//    std::ifstream file("Data.txt");
+//    if(file.is_open()){
+//        file >> k;                                  //wczytujemy rozmiar macierzy z pliku
+//        file >> v;
+//        tab = new signed char * [v];                  //tworzymy tablicę wskaźników do przechowywania macierzy incydencji
+//        for(i = 0; i < v; i++)
+//        {
+//            tab [i] = new signed char [k];         // Tworzymy wiersze macierzy
+//        }
+//        for( i = 0; i < v; i++ )
+//        {
+//            for( j = 0; j < k; j++ )
+//            {
+//                tab[ i ][ j ] = 0;                      // Macierz wypełniamy zerami, zanim uzupełnimy ją 1 i -1
+//            }
+//        }
+//        for( i = 0; i < k; i++ )
+//        {
+//            file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
+//            file >> v2;
+//            file >> w;
+//            tab[v2][i] = -w;    // Wierzchołek końcowy
+//            tab[v1][i] = w;     // Wierzchołek startowy
+//        }
+//    }
+//    file.close();
+//    std::cout << "   ";
+//}
+//
 
 void Matrix::displayMatrix()
 {
@@ -93,77 +83,27 @@ void Matrix::deleteMatrix()
 
 }
 
-void Matrix::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw)
-{
-    int v1; //wierzchołek początkowy
-    int v2; //wierzchołek końcowy
-    int w;  //krawędź - waga
-
-        tab = new signed char * [v];                  //tworzymy tablicę wskaźników do przechowywania macierzy incydencji
-
-        for(int i = 0; i < v; i++)
-        {
-            tab [i] = new signed char [k];         // Tworzymy wiersze macierzy
-        }
-
-        for(int i = 0; i < v; i++ )
-        {
-            for(int j = 0; j < k; j++ )
-            {
-                tab[ i ][ j ] = 0;                      // Macierz wypełniamy zerami, zanim uzupełnimy ją 1 i -1
-            }
-        }
-
-        for(int i = 0; i < k; i++ )
-        {
-            v1 = tabv1[i];
-            v2 = tabv2[i];
-            w = tabw[i];
-
-            tab[v2][i] = -w;    // Wierzchołek końcowy
-            tab[v1][i] = w;     // Wierzchołek startowy
-        }
-
-        //disp
-    int i,j;
-    std:: cout <<"   ";
-    for( i = 0; i < k; i++ )
+void Matrix::matrixFromGraph(Graph graph) {
+    v = graph.v;
+    k = graph.size;
+    tab = new int * [v];
+    for(int i = 0; i < v; i++)
     {
-        std::cout << std::setw ( 3 ) << i;        //numeracja kolumn
+        tab [i] = new int [k];         // Tworzymy wiersze macierzy
     }
-
-    std::cout << std::endl;
-
-    for( i = 0; i < v; i++ )
+    for(int i = 0; i < v; i++ )
     {
-
-        std::cout << std::setw ( 3 ) << i;        //numeracja wierszy
-
-        for( j = 0; j < k; j++ )
+        for(int j = 0; j < k; j++ )
         {
-            std::cout << std::setw ( 3 ) << ( int ) tab [i][j];
+            tab[ i ][ j ] = 0;                      // Macierz wypełniamy zerami, zanim uzupełnimy ją 1 i -1
         }
-
-        std::cout << std::endl;
     }
-        //disp
-
+    for(int i = 0; i < k; i++ )
+    {
+        tab[graph.edgeTab[i].y][i] = -graph.edgeTab[i].z;    // Wierzchołek końcowy
+        tab[graph.edgeTab[i].x][i] = graph.edgeTab[i].z;     // Wierzchołek startowy
     }
 
 
+}
 
-//
-//int Matrix::vertexCount()
-//{
-//    return n;
-//}
-//
-//int Matrix::edgesCount()
-//{
-//    return m;
-//}
-//
-//signed char ** Matrix::getMatrix()
-//{
-//    return tab;
-//}

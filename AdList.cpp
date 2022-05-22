@@ -9,50 +9,6 @@
 #include <random>
 
 
-void AdList::readFromFile()
-{
-
-    int v1; //wierzchołek początkowy
-    int v2; //wierzchołek końcowy
-    int w;  //krawędź - waga
-
-    std::ifstream file("Data.txt");
-
-
-    if(file.is_open()){
-
-        file >> k;                      //wczytujemy rozmiar macierzy z pliku
-        file >> v;
-
-        tab = new stList * [v];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
-
-        for(int i = 0; i < v; i++)
-        {
-            tab [i] = NULL;         // Tablicę wypełniamy zerami
-        }
-
-        for(int i = 0; i < k; i++ )
-        {
-            file >> v1;         //wczytujemy z pliku kolejno wiechołek początkowy, końcowy jak i wagę
-            file >> v2;
-            file >> w;
-
-            if(i == 0)
-            {
-                v0 = v1;
-            }
-
-            p = new stList;         // Tworzymy nowy element
-            p->index = v2;          // Numerujemy go jako v2
-            p->next = tab [v1];     // Dodajemy go na początek listy A [ v1 ]
-            p->weight = w;
-            tab [v1] = p;
-        }
-    }
-    file.close();
-    std::cout << std::endl;
-}
-
 void AdList::displayAdList(){
     for(int i = 0; i < v; i++ )
     {
@@ -86,49 +42,6 @@ void AdList::deleteList(){
 
 }
 
-void AdList::randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw)
-{
-
-    int v1; //wierzchołek początkowy
-    int v2; //wierzchołek końcowy
-    int w;  //krawędź - waga
-
-    tab = new stList * [v];          //tworzymy tablicę wskaźników do przechowywania listy sąsiedztwa
-
-        for(int i = 0; i < v; i++)
-        {
-            tab [i] = NULL;         // Tablicę wypełniamy zerami
-        }
-
-        for(int i = 0; i < k; i++ )
-        {
-            v1 = tabv1[i];
-            v2 = tabv2[i];
-            w = tabw[i];
-
-            p = new stList;         // Tworzymy nowy element
-            p->index = v2;          // Numerujemy go jako v2
-            p->next = tab [v1];     // Dodajemy go na początek listy A [ v1 ]
-            p->weight = w;
-            tab [v1] = p;
-        }
-
-//    //disp
-//    for(int i = 0; i < v; i++ )
-//    {
-//        std::cout << "tab [ " << i << " ] =";
-//        p = tab [ i ];
-//
-//        while( p )
-//        {
-//            std::cout << std::setw ( 3 ) << p->index <<  " : " << p->weight;
-//            p = p->next;
-//        }
-//        std::cout << std::endl;
-//    }
-//    //disp
-
-}
 
 int AdList::getV() {
     return v;
@@ -138,22 +51,13 @@ stList * AdList::getList(int i) {
     return  tab[i];
 }
 
-void AdList::kruskal() {
-    L = new stList * [v];
-    for(int i = 0; i < v; i++)
-    {
-        L [i] = tab [i];
-    }
 
-
-
-}
 
 void AdList::dijkstry()
 {
     //DIJKSTRY
 
-    const int MAXINT = 2147483647; //nieksończonosć tak jakby
+    const int MAXINT = 2147483647; //nieskończoność tak jakby
     int *S, *d, *pr;
     bool *QS;                       //zbiory Q i S
     int sptr;                       //wskaźnik stosu
@@ -186,7 +90,7 @@ void AdList::dijkstry()
 
     for(i = 0; i < v; i++ )
     {
-        for(j = 0; QS [j]; j++ );     //Szukamy wierzchołka w Q o najmniejszym koszcie d
+        for(j = 0; QS [j]; j++ );     //Szukamy wierzchołka z Q o najmniejszym koszcie d
 
         for(u = j++; j < v; j++ )
         {
@@ -199,7 +103,7 @@ void AdList::dijkstry()
 
         QS [ u ] = true;
 
-        // Modyfikujemy odpowiednio wszystkich sąsiadów u, którzy są w Q
+        // Modyfikujemy odpowiednio wszystkich sąsiadów x, którzy są z Q
 
         for( pw = tab [u]; pw; pw = pw->next ) {
             if (!QS[pw->index] && (d[pw->index] > d[u] + pw->weight)) {
@@ -217,7 +121,7 @@ void AdList::dijkstry()
     {
         std::cout << i << ": ";
 
-        //Ścieżkę przechodzimy w odrotnej kolejności (koniec - > początek), kolejne wierzchołki zapisujemy na stosie
+        //Ścieżkę przechodzimy z odrotnej kolejności (koniec - > początek), kolejne wierzchołki zapisujemy na stosie
 
 
         for(int j = i; j > -1; j = pr [ j ] )
@@ -242,6 +146,45 @@ void AdList::dijkstry()
     delete [] QS;
     delete [] S;
 
+}
+
+void AdList::kruskal() {
+
+}
+
+int AdList::find(int *belongs, int vertexno) {
+    return 0;
+}
+
+void AdList::applyUnion(int *belongs, int c1, int c2) {
+
+}
+
+void AdList::sort() {
+
+}
+
+void AdList::print() {
+
+}
+
+void AdList::readFromGraph(Graph graph) {
+    v = graph.v;
+    k = graph.size;
+    tab = new stList * [v];
+    for(int i = 0; i < v; i++)
+    {
+        tab [i] = NULL;         // Tablicę wypełniamy zerami
+    }
+    for(int i = 0; i < k; i++ )
+    {
+        p = new stList;
+        p->index = graph.edgeTab[i].y;
+        p->next = tab [graph.edgeTab[i].x ];
+        p->weight = graph.edgeTab[i].z;
+        tab [graph.edgeTab[i].x ] = p;
+    }
+    v0 = graph.edgeTab[0].x;
 }
 
 

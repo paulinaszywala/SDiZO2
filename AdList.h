@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include "Graph.h"
 
 struct stList
 {
@@ -21,26 +22,31 @@ class AdList {
 private:
 
     int v;  //liczba wierzchołków grafu
+    int ** tablica;
     int k;  //liczba krawędzi grafu
     int v0; //wierzchołek startowy do najkrótszej ścieżki
 
 
     //KRUSKAL
 
-    stList ** tab, **L, **T;
+    stList ** tab;
     stList *p, *temp;
 
 
 public:
 
-
-
-    void readFromFile();
+    void readFromGraph(Graph graph);
     void displayAdList();
     void deleteList();
-    void randomGraph(int v, float d, int k, int * tabv1, int * tabv2, int * tabw);
     int getV();
     stList * getList(int i);
-    void kruskal();
+
     void dijkstry();
+    //Kruskal
+    void kruskal();
+    int find(int belongs[], int vertexno);
+    void applyUnion(int belongs[], int c1, int c2);
+    void sort();
+    void print();
+
 };

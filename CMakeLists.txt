@@ -3,4 +3,4 @@ project(SDiZO2)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(SDiZO2 main.cpp Matrix.cpp Matrix.h AdList.cpp AdList.h)
+add_executable(SDiZO2 main.cpp Matrix.cpp Matrix.h AdList.cpp AdList.h Graph.cpp Graph.h)

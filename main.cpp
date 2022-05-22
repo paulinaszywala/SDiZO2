@@ -1,68 +1,31 @@
 #include <iostream>
 #include <random>
+#include <fstream>
 #include "Matrix.h"
 #include "AdList.h"
-
+#include "Graph.h"
 
 Matrix m;
 AdList list;
-int s;
+int s, v;
+float d, k;
 bool loop;
 using namespace std;
 
-void readFromFile(){
-    m.readFromFile();
-    list.readFromFile();
+int getSizeFromFile(){
+    int size{};
+    ifstream file("Data.txt");
+    if(file.is_open())
+        file >> size;
+    file.close();
+        return size;
+
 }
 
-int Random(int min, int max)            //Funkcja do generowania wartości losowych z przedziału <min, max>
-{
-    int i;
-
-    std::random_device crypto_random_generator;
-    std::uniform_int_distribution<int> int_distribution(min, max);
-
-    int result = int_distribution(crypto_random_generator);
-
-    return result;
-}
-
-void randGenerate(){
-
-    int v,k;
-    float d;
-
-    int v1; //wierzchołek początkowy
-    int v2; //wierzchołek końcowy
-    int w;  //krawędź - waga
-
-    v = Random(4,10);
-    d = 0.25;
-    k = floor((d * v * (v-1)) / 2);
-
-    int tabv1[v];
-    int tabv2[v];
-    int tabw[k];
-
-    for(int i = 0; i < v; i++)
-    {
-        v1 = Random(0, (v-1));
-        tabv1[i] = v1;
-        v2 = Random(0, (v-1));
-        tabv2[i] = v2;
-    }
-    for(int i = 0; i < k; i++)
-    {
-        w = Random(0,k);
-        tabw[i] = w;
-    }
-
-    m.randomGraph(v,d,k,tabv1,tabv2,tabw);
-    list.randomGraph(v,d,k,tabv1,tabv2,tabw);
-    //tutaj losowanie i generowanie struktur
-}
-void MST(){
+void MST(Graph graph){
     loop = true;
+    list.readFromGraph(graph);
+    m.matrixFromGraph(graph);
     while(loop){
         cout << endl << "Wyswietl graf listowo  - 1 " << endl;
         cout << "Wyswietl graf macierzowo - 2 " << endl;
@@ -85,7 +48,7 @@ void MST(){
                 break;
             }
             case 4: {
-                //tu wywołanie Kruskala
+                list.kruskal();
                 break;
             }
             case 5: {
@@ -98,7 +61,7 @@ void MST(){
         }
     }
 }
-void ShortestPath(){
+void ShortestPath(Graph graph){
     loop = true;
     while(loop){
         cout << endl << "Wyswietl graf listowo  - 1 " << endl;
@@ -110,10 +73,12 @@ void ShortestPath(){
         cin >> s;
         switch (s) {
             case 1: {
+                list.readFromGraph(graph);
                 list.displayAdList();
                 break;
             }
             case 2: {
+                m.matrixFromGraph(graph);
                 m.displayMatrix();
                 break;
             }
@@ -141,7 +106,7 @@ int main() {
     //  Główna pętla programu, pozwalająca na wybranie trybu pracy
     while(true) {
         cout << endl << "Wyznaczanie minimalnego drzewa rozpinajacego  - 1 " << endl;
-        cout << "Wyznaczanie najkrotszej sciezki w grafie - 2 " << endl;
+        cout << "Wyznaczanie najkrotszej sciezki z grafie - 2 " << endl;
         cout << "Pomiary - 3" << endl;
         cout << "Wyjscie z programu - 0 " << endl;
         cout << "Wybierz pozycje: " << endl;
@@ -163,16 +128,23 @@ int main() {
                 switch (s) {
                     //Wczytywanie z pliku
                     case 1: {
-                        readFromFile();
-                        MST();
+                        Graph graph(getSizeFromFile());
+                        graph.readFromFile();
+                        MST(graph);
                         m.deleteMatrix();
                         list.deleteList();
                         break;
                     }
                     //Losowanie grafu
                     case 2: {
-                        randGenerate();
-                        MST();
+                        cout << "Podaj liczbe wierzcholkow: ";
+                        cin >> v;
+                        cout << "Podaj gestosc grafu: ";
+                        cin >> d;
+                        k = floor((d * v * (v - 1)) / 2);
+                        Graph graph(k);
+                        graph.generateRandomGraph(v);
+                        MST(graph);
                         m.deleteMatrix();
                         list.deleteList();
                         break;
@@ -184,7 +156,7 @@ int main() {
                 }
                 break;
             }
-            //Wyznaczanie najkrótszej ścieżki w grafie
+            //Wyznaczanie najkrótszej ścieżki z grafie
             case 2: {
                 cout << "Wczytaj z pliku  - 1 " << endl;
                 cout << "Wygeneruj losowy graf- 2 " << endl;
@@ -193,14 +165,25 @@ int main() {
                 switch (s) {
                     //Wczytywanie z pliku
                     case 1: {
-                        readFromFile();
-                        ShortestPath();
+                        Graph graph(getSizeFromFile());
+                        graph.readFromFile();
+                        ShortestPath(graph);
+                        m.deleteMatrix();
+                        list.deleteList();
                         break;
                     }
                     //Losowanie grafu
                     case 2: {
-                        randGenerate();
-                        ShortestPath();
+                        cout << "Podaj liczbe wierzcholkow: ";
+                        cin >> v;
+                        cout << "Podaj gestosc grafu: ";
+                        cin >> d;
+                        k = floor((d * v * (v - 1)) / 2);
+                        Graph graph(k);
+                        graph.generateRandomGraph(v);
+                        ShortestPath(graph);
+                        m.deleteMatrix();
+                        list.deleteList();
                         break;
                     }
                     default: {
