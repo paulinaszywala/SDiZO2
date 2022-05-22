@@ -48,7 +48,8 @@ void MST(Graph graph){
                 break;
             }
             case 4: {
-                list.kruskal();
+                graph.Kruskal();
+                graph.print();
                 break;
             }
             case 5: {

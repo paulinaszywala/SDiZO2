@@ -148,25 +148,6 @@ void AdList::dijkstry()
 
 }
 
-void AdList::kruskal() {
-
-}
-
-int AdList::find(int *belongs, int vertexno) {
-    return 0;
-}
-
-void AdList::applyUnion(int *belongs, int c1, int c2) {
-
-}
-
-void AdList::sort() {
-
-}
-
-void AdList::print() {
-
-}
 
 void AdList::readFromGraph(Graph graph) {
     v = graph.v;

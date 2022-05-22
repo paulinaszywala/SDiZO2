@@ -44,9 +44,6 @@ public:
     void dijkstry();
     //Kruskal
     void kruskal();
-    int find(int belongs[], int vertexno);
-    void applyUnion(int belongs[], int c1, int c2);
-    void sort();
-    void print();
+
 
 };
