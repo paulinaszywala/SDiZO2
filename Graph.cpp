@@ -5,6 +5,7 @@
 #include<stdbool.h>
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 #include "Graph.h"
 
 void Graph::generateRandomGraph(int vert) {
@@ -32,8 +33,8 @@ void Graph::readFromFile() {
 }
 
 Graph::Graph(int k) {
-        edgeTab = new edge [k];
-        size = k;
+    edgeTab = new edge [k];
+    size = k;
 }
 
 int Graph::Random(int min, int max) {
@@ -118,11 +119,14 @@ int Graph::Random(int min, int max) {
 //}
 
 void Graph::Prim() {
-    // Prim's Algorithm in C
 
 #define INF 9999999
+
+   // int primV;
+
 // create a 2d array of size 5x5
 //for adjacency matrix to represent graph
+
     int G[v][v];
     for(int i = 0; i < v; i++ )
         for(int j = 0; j < v; j++)
@@ -132,61 +136,74 @@ void Graph::Prim() {
         G[edgeTab[i].y][edgeTab[i].x] = edgeTab[i].z;
     }
 
-        int no_edge;  // number of edge
+    //int no_edge;  // number of edge
 
-        // create a array to track selected vertex
-        // selected will become true otherwise false
-        int selected[v];
-        for(int i = 0; i < v; i++)
-            selected[i] = false;
+    // create a array to track selected vertex
+    // selected will become true otherwise false
+    int selected[v];
+    for(int i = 0; i < v; i++)
+        selected[i] = false;
+
+    int licznik;
+
+    // set number of edge to 0
+    size = 0;
+    licznik = 0;
+
+    // the number of egde in minimum spanning tree will be
+    // always less than (V -1), where V is number of vertices in
+    //graph
+
+    // choose 0th vertex and make it true
+    selected[0] = true;
+
+    int x;  //  row number
+    int y;  //  col number
+    int z;
+
+//    // print for edge and weight
+//    printf("Edge : Weight\n");
 
 
 
-        // set number of edge to 0
-        no_edge = 0;
+    while (size < v - 1) {
+        //For every vertex in the set S, find the all adjacent vertices
+        // , calculate the distance from the vertex selected at step 1.
+        // if the vertex is already in the set S, discard it otherwise
+        //choose another vertex nearest to selected vertex  at step 1.
 
-        // the number of egde in minimum spanning tree will be
-        // always less than (V -1), where V is number of vertices in
-        //graph
-
-        // choose 0th vertex and make it true
-        selected[0] = true;
-
-        int x;  //  row number
-        int y;  //  col number
-
-        // print for edge and weight
-        printf("Edge : Weight\n");
-
-        while (no_edge < v - 1) {
-            //For every vertex in the set S, find the all adjacent vertices
-            // , calculate the distance from the vertex selected at step 1.
-            // if the vertex is already in the set S, discard it otherwise
-            //choose another vertex nearest to selected vertex  at step 1.
-
-            int min = INF;
-            x = 0;
+        int min = INF;
+//        x = 0;
             y = 0;
 
-            for (int i = 0; i < v; i++) {
-                if (selected[i]) {
-                    for (int j = 0; j < v; j++) {
-                        if (!selected[j] && G[i][j]) {  // not in selected and there is an edge
-                            if (min > G[i][j]) {
-                                min = G[i][j];
-                                x = i;
-                                y = j;
-                            }
+
+        for (int i = 0; i < v; i++) {
+            if (selected[i]) {
+                for (int j = 0; j < v; j++) {
+                    if (!selected[j] && G[i][j]) {  // not in selected and there is an edge
+                        if (min > G[i][j]) {
+                            min = G[i][j];
+
+                            x = i;
+                            y = j;
+                            z = G[x][y];
+
+                            edgeTab[licznik].x = x;
+                            edgeTab[licznik].y = y;
+                            edgeTab[licznik].z = z;
+
                         }
                     }
                 }
+
             }
-            printf("%d - %d : %d\n", x, y, G[x][y]);
-            selected[y] = true;
-            no_edge++;
         }
+
+        licznik++;
+        std::cout << x << " - " << y << " : " << z << std::endl;
+        selected[y] = true;
+        size++;
+    }
 
 
 }
-
-

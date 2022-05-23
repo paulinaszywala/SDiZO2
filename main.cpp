@@ -18,7 +18,7 @@ int getSizeFromFile(){
     if(file.is_open())
         file >> size;
     file.close();
-        return size;
+    return size;
 
 }
 
@@ -45,6 +45,12 @@ void MST(Graph graph){
             }
             case 3: {
                 graph.Prim();
+                std::cout<<"\n\nListowo: \n\n"<<std::endl;
+                list.readFromGraph(graph);
+                list.displayAdList();
+                std::cout<<"\n\nMacierzowo: \n\n"<<std::endl;
+                m.matrixFromGraph(graph);
+                m.displayMatrix();
                 break;
             }
             case 4: {
@@ -117,10 +123,10 @@ int main() {
                 cout << "Niepoprawna opcja!" << endl;
                 break;
             }
-            //Wyjście z programu
+                //Wyjście z programu
             case 0:
                 return 0;
-            //Wyznaczanie minimalnego drzewa rozpinającego
+                //Wyznaczanie minimalnego drzewa rozpinającego
             case 1: {
                 cout << "Wczytaj z pliku  - 1 " << endl;
                 cout << "Wygeneruj losowy graf- 2 " << endl;
@@ -136,7 +142,7 @@ int main() {
                         list.deleteList();
                         break;
                     }
-                    //Losowanie grafu
+                        //Losowanie grafu
                     case 2: {
                         cout << "Podaj liczbe wierzcholkow: ";
                         cin >> v;
@@ -157,7 +163,7 @@ int main() {
                 }
                 break;
             }
-            //Wyznaczanie najkrótszej ścieżki z grafie
+                //Wyznaczanie najkrótszej ścieżki z grafie
             case 2: {
                 cout << "Wczytaj z pliku  - 1 " << endl;
                 cout << "Wygeneruj losowy graf- 2 " << endl;
@@ -173,7 +179,7 @@ int main() {
                         list.deleteList();
                         break;
                     }
-                    //Losowanie grafu
+                        //Losowanie grafu
                     case 2: {
                         cout << "Podaj liczbe wierzcholkow: ";
                         cin >> v;
