@@ -7,7 +7,7 @@
 
 Matrix m;
 AdList list;
-int s, v;
+int s, v, v0,vk;
 float d, k;
 bool loop;
 using namespace std;
@@ -90,8 +90,11 @@ void ShortestPath(Graph graph){
                 break;
             }
             case 3: {
-                //tu wywołanie Dijkstry
-                list.dijkstry();
+                cout << "Podaj wierzcholek poczatkowy: ";
+                cin >> v0;
+                cout << "Podaj wierzcholek koncowy: ";
+                cin >> vk;
+                graph.dijkstry(v0);
                 break;
             }
             case 4: {

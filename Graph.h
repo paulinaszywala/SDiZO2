@@ -14,6 +14,7 @@ public:
     int v; //liczba wierzchołków
 
 
+
     static int Random(int min, int max);           //Funkcja do generowania wartości losowych z przedziału <min, max>
     void generateRandomGraph(int vert);
     void readFromFile();
@@ -26,6 +27,7 @@ public:
     //delete graph
     //Prim
     void Prim();
+    void dijkstry(int v0);
 };
 #endif
 

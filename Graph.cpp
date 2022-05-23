@@ -30,6 +30,7 @@ void Graph::readFromFile() {
         }
     }
     file.close();
+
 }
 
 Graph::Graph(int k) {
@@ -207,3 +208,176 @@ void Graph::Prim() {
 
 
 }
+
+
+
+void Graph::dijkstry(int v0, int vk;)
+{
+
+#define INFINITY 9999
+
+    int cost[v][v], distance[v], pred[v];
+    int visited[v], count, mindistance, nextnode, i, j;
+
+    int G[v][v];
+    for(int i = 0; i < v; i++ )
+        for(int j = 0; j < v; j++)
+            G[i][j] = 0;
+    for(int i = 0; i < size; i++){
+        G[edgeTab[i].x][edgeTab[i].y] = edgeTab[i].z;
+        G[edgeTab[i].y][edgeTab[i].x] = edgeTab[i].z;
+    }
+
+    // Creating cost matrix
+    for (i = 0; i < v; i++)
+        for (j = 0; j < v; j++)
+            if (G[i][j] == 0)
+                cost[i][j] = INFINITY;
+            else
+                cost[i][j] = G[i][j];
+
+    for (i = 0; i < v; i++) {
+        distance[i] = cost[v0][i];
+        pred[i] = v0;
+        visited[i] = 0;
+    }
+
+    distance[v0] = 0;
+    visited[v0] = 1;
+    count = 1;
+
+    while (count < v - 1) {
+        mindistance = INFINITY;
+
+        for (i = 0; i < v; i++)
+            if (distance[i] < mindistance && !visited[i]) {
+                mindistance = distance[i];
+                nextnode = i;
+            }
+
+        visited[nextnode] = 1;
+        for (i = 0; i < v; i++)
+            if (!visited[i])
+                if (mindistance + cost[nextnode][i] < distance[i]) {
+                    distance[i] = mindistance + cost[nextnode][i];
+                    pred[i] = nextnode;
+                }
+        count++;
+    }
+
+    // Printing the distance
+    for (i = 0; i < v; i++)
+        if (i != v0) {
+            printf("\nDistance from source to %d: %d", i, distance[i]);
+        }
+}
+
+
+
+
+    //stary DIJKSTRY
+//
+//    const int MAXINT = 2147483647; //nieskończoność tak jakby
+//    int *S, *d, *pr;
+//    bool *QS;                       //zbiory Q i S
+//    int sptr;                       //wskaźnik stosu
+//    edge *pw, *rw;
+//    int i,j,u;
+//    int mind;
+//
+//    d = new int [v];    //tablica kosztow dojścia
+//    pr = new int [v];   //tablica poprzedników
+//
+//    QS = new bool[v];
+//    S = new int[v];     //stos
+//
+//    int licznik;
+//
+//    sptr = 0;
+//
+//
+//
+//    //Inicjalizacja tablic
+//
+//    for(int i = 0; i < v; i++)
+//    {
+//        d[i] = MAXINT;   //"nieskończoność"
+//        pr[i] = -1;      //nieistniejący numer wierzchołka
+//        QS[i] = false;
+//        //listę sąsiedztwa mamy już wypełnioną zerami
+//    }
+//
+//    d[v0] = 0;          //koszt dojścia do wierzchołka startowego jest zerowy
+//
+//
+//    //Wyznaczamy ścieżki
+//
+//    for(i = 0; i < v; i++ )
+//    {
+//        for(j = 0; QS [j]; j++ );     //Szukamy wierzchołka z Q o najmniejszym koszcie d
+//
+//        for(u = j++; j < v; j++ )
+//        {
+//            if (!QS[j] && (d[j] < d[u])) {
+//                u = j;
+//                d[u] = d[j];
+//            }
+//        }
+//
+//        // Znaleziony wierzchołek przenosimy do S
+//
+//        QS [ u ] = true;
+//
+//
+//        // Modyfikujemy odpowiednio wszystkich sąsiadów x, którzy są z Q
+////
+////        for( pw = tab [u]; pw; pw = pw->next ) {
+////            if (!QS[pw->index] && (d[pw->index] > d[u] + pw->weight)) {
+////                d[pw->index] = d[u] + pw->weight;
+////                pr[pw->index] = u;
+////            }
+////        }
+//
+//        for(pw = &edgeTab[licznik]; pw; pw = edgeTab[u].x)
+//        {
+//            if(!QS[pw[u].y] && d[pw[u].y] > d[u] + pw[u].z)
+//            {
+//                d[pw[u].y] = d[u] + pw[u].z;
+//                pr[pw[u].y] = u;
+//            }
+//        }
+//    }
+//
+//
+//
+//    //WYŚWIETLENIE WYNIKÓW
+//
+//    for( i = 0; i < v; i++ )
+//    {
+//        std::cout << i << ": ";
+//
+//        //Ścieżkę przechodzimy z odrotnej kolejności (koniec - > początek), kolejne wierzchołki zapisujemy na stosie
+//
+//
+//        for(int j = i; j > -1; j = pr [ j ] )
+//        {
+//            S [ sptr++ ] = j;
+//        }
+//
+//        // Wyświetlamy ścieżkę, pobierając wierzchołki ze stosu
+//
+//        while( sptr ){
+//
+//            std::cout << S [ --sptr ] << " ";
+//        }
+//
+//        // Na końcu ścieżki wypisujemy jej koszt
+//
+//        std::cout << "$" << d [ i ] << std::endl;
+//    }
+//
+//    delete [] d;
+//    delete [] pr;
+//    delete [] QS;
+//    delete [] S;
+

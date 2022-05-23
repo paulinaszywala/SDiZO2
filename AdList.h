@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "Graph.h"
 
@@ -41,9 +40,8 @@ public:
     int getV();
     stList * getList(int i);
 
-    void dijkstry();
     //Kruskal
-    void kruskal();
+//    void kruskal();
 
 
 };
