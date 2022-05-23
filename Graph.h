@@ -18,6 +18,8 @@ public:
     static int Random(int min, int max);           //Funkcja do generowania wartości losowych z przedziału <min, max>
     void generateRandomGraph(int vert);
     void readFromFile();
+    bool containsv0(int vo);
+    bool containsvk(int vk);
     //Kruskal
 //    Graph Kruskal();
 //    int find(int belongs[], int vertexno);
@@ -27,7 +29,7 @@ public:
     //delete graph
     //Prim
     void Prim();
-    void dijkstry(int v0);
+    void dijkstry(int v0, int vk);
 };
 #endif
 

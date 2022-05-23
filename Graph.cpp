@@ -47,6 +47,52 @@ int Graph::Random(int min, int max) {
     return result;
 }
 
+bool Graph::containsv0(int v0)
+{
+    int i = 0;
+
+    while(i <= size)
+    {
+        if(edgeTab[i].x == v0)
+        {
+            return true;
+            break;
+        }
+        else if(i == size){
+            return false;
+        }
+        else
+        {
+            i++;
+        }
+
+    }
+
+}
+
+bool Graph::containsvk(int vk)
+{
+    int i = 0;
+
+    while(i <= size)
+    {
+        if(edgeTab[i].y == vk)
+        {
+            return true;
+            break;
+        }
+        else if(i == size){
+            return false;
+        }
+        else
+        {
+            i++;
+        }
+
+    }
+}
+
+
 //Graph Graph::Kruskal() {
 //    int nGraph[v][v];
 //    for(int i = 0; i < v; i++ )
@@ -211,7 +257,7 @@ void Graph::Prim() {
 
 
 
-void Graph::dijkstry(int v0, int vk;)
+void Graph::dijkstry(int v0, int vk)
 {
 
 #define INFINITY 9999
@@ -225,7 +271,7 @@ void Graph::dijkstry(int v0, int vk;)
             G[i][j] = 0;
     for(int i = 0; i < size; i++){
         G[edgeTab[i].x][edgeTab[i].y] = edgeTab[i].z;
-        G[edgeTab[i].y][edgeTab[i].x] = edgeTab[i].z;
+//        G[edgeTab[i].y][edgeTab[i].x] = edgeTab[i].z;
     }
 
     // Creating cost matrix
@@ -266,11 +312,18 @@ void Graph::dijkstry(int v0, int vk;)
     }
 
     // Printing the distance
+//    for (i = 0; i < v; i++)
+//        if (i != v0) {
+//            printf("\nDistance from source to %d: %d", i, distance[i]);
+//        }
+
     for (i = 0; i < v; i++)
-        if (i != v0) {
-            printf("\nDistance from source to %d: %d", i, distance[i]);
+        if (i == vk) {
+            std::cout<<std::endl;
+            std::cout<<"Koszt przejscia z "<< v0 << " do "<< i << " to: " << distance[i]<<std::endl<<std::endl;
         }
 }
+
 
 
 

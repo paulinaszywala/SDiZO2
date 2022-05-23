@@ -92,9 +92,24 @@ void ShortestPath(Graph graph){
             case 3: {
                 cout << "Podaj wierzcholek poczatkowy: ";
                 cin >> v0;
-                cout << "Podaj wierzcholek koncowy: ";
-                cin >> vk;
-                graph.dijkstry(v0);
+                if(graph.containsv0(v0))
+                {
+                    cout << "Podaj wierzcholek koncowy: ";
+                    cin >> vk;
+
+                    if(graph.containsvk(vk))
+                    {
+                        graph.dijkstry(v0, vk);
+                    }
+                    else
+                    {
+                        std::cout<<"Taki wierzcholek koncowy nie istnieje!"<<std::endl;
+                    }
+                }
+                else
+                {
+                    std::cout<<"Taki wierzcholek poczatkowy nie istnieje!"<<std::endl;
+                }
                 break;
             }
             case 4: {
