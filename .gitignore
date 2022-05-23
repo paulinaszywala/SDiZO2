@@ -1,5 +1,9 @@
 # Prerequisites
 *.d
+*.log
+*.cmake
+*.c
+*.json
 
 # Compiled Object files
 *.slo

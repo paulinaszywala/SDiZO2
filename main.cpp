@@ -44,12 +44,12 @@ void MST(Graph graph){
                 break;
             }
             case 3: {
-                //tu wywołanie Prima
+                graph.Prim();
                 break;
             }
             case 4: {
-                graph.Kruskal();
-                graph.print();
+//                graph.Kruskal();
+//                graph.print();
                 break;
             }
             case 5: {
